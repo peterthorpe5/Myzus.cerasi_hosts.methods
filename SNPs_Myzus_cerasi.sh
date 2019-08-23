@@ -103,6 +103,8 @@ samtools merge -@ 6 -f -r -h header.txt merged.bam Mc_PR_Cherry_1.bam Mc_PR_Cher
 
 samtools index merged.bam
 
+
+# call the SNP/ varients then calculate the density
 /mnt/shared/synology/PATH/apps/conda/bin/freebayes -f Mc_alt.fasta --no-population-priors --min-alternate-count 5 --min-alternate-fraction 0.9 -v M.cerasi_Mc_PR_Cherry_1.vcf --ploidy 2 Mc_PR_Cherry_1.bam
 vcftools --vcf M.cerasi_Mc_PR_Cherry_1.vcf --SNPdensity 10000 --out M.cerasi_Mc_PR_Cherry_1.SNP_snpdensity
 
@@ -132,3 +134,7 @@ vcftools --vcf M.cerasi_Mc_PR_Galium_2.vcf --SNPdensity 10000 --out M.cerasi_Mc_
 
 
 /mnt/shared/synology/PATH/apps/conda/bin/freebayes -f Mc_alt.fasta --no-population-priors --min-alternate-count 5 --min-alternate-fraction 0.9 -v M.cerasi_cherry_galium_cress.vcf --ploidy 2 merged.bam
+
+# caluclate the stats on the vcf file
+
+/storage/home/users/pjt6/rtg-tools-3.10.1/rtg vcfstats --allele-lengths M.cerasi_cherry_galium_cress.vcf > Aphid_vcf_SNP_stats.txt
