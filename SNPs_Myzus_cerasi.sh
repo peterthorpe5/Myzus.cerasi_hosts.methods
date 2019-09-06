@@ -138,3 +138,13 @@ vcftools --vcf M.cerasi_Mc_PR_Galium_2.vcf --SNPdensity 10000 --out M.cerasi_Mc_
 # caluclate the stats on the vcf file
 
 /storage/home/users/pjt6/rtg-tools-3.10.1/rtg vcfstats --allele-lengths M.cerasi_cherry_galium_cress.vcf > Aphid_vcf_SNP_stats.txt
+
+# claulate the PI per aphid/host population-priors
+# the three rep on cherry
+vcftools --vcf M.cerasi_cherry_galium_cress.vcf --window-pi 10000 --out M.cerasi_cherry.10000.sitepi --remove-indv  Mc_PR_cress_1  --remove-indv  Mc_PR_cress_2   --remove-indv  Mc_PR_cress_3  --remove-indv  Mc_PR_Galium_1  --remove-indv  Mc_PR_Galium_2 --remove-indv  Mc_PR_Galium_3
+
+# the three reps on cress
+vcftools --vcf M.cerasi_cherry_galium_cress.vcf --window-pi 10000 --out M.cerasi_cress.10000.sitepi --remove-indv  Mc_PR_Cherry_1  --remove-indv  Mc_PR_Cherry_2  --remove-indv  Mc_PR_Cherry_3  --remove-indv  Mc_PR_Galium_1  --remove-indv  Mc_PR_Galium_2 --remove-indv  Mc_PR_Galium_3
+
+# the three reps on cleavers/ galium (sticky weed - what ever it is called)
+vcftools --vcf M.cerasi_cherry_galium_cress.vcf --window-pi 10000 --out M.cerasi_cleavers.10000.sitepi  --remove-indv  Mc_PR_Cherry_1  --remove-indv  Mc_PR_Cherry_2  --remove-indv  Mc_PR_Cherry_3  --remove-indv  Mc_PR_cress_1  --remove-indv  Mc_PR_cress_2   --remove-indv  Mc_PR_cress_3  
