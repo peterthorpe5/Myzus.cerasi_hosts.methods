@@ -1,10 +1,14 @@
 from collections import defaultdict
+import collections
 from scipy import stats
 from scipy.stats import mannwhitneyu
 import numpy
 import matplotlib
 import matplotlib.pyplot as plt
 import pylab
+from itertools import islice
+from operator import itemgetter
+
 
 
 def average_standard_dev(lengths):
@@ -67,6 +71,10 @@ def plot_seq_len_histograms(db, assembled, outname):
     pylab.savefig(outpng)
     pylab.close()
 
+
+def take(n, iterable):
+    "Return first n items of the iterable as a list"
+    return list(islice(iterable, n))
 
 def open_file_retunrPI(infile):
     """def to open the pi ouput from vcf tools
@@ -150,3 +158,38 @@ ttest = ('t-statistic = %6.3f pvalue = %6.4f' %
              stats.ttest_ind(cleaver_hetero_ratio, cherry_hetero_ratio))
 print("cherry_vs_cleavers_Hetero_ratio: ", ttest)
 
+# Cress: find the most SNP heavy region:
+cress_scaff_bin_to_PI2 = collections.OrderedDict(sorted(cress_scaff_bin_to_PI.items(),
+                                                             key=itemgetter(1), reverse=False))
+cress_scaff_bin_to_varients2 = collections.OrderedDict(sorted(cress_scaff_bin_to_varients.items(),
+                                                             key=itemgetter(1), reverse=False))
+
+n_items = take(3, cress_scaff_bin_to_PI2.items())
+
+print("cress, hiest PI:", n_items)
+n_items = take(10, cress_scaff_bin_to_varients2.items())
+print("cress, most varients:", n_items)
+
+# cherry: find the most SNP heavy region:
+cherry_scaff_bin_to_PI2 = collections.OrderedDict(sorted(cherry_scaff_bin_to_PI.items(),
+                                                             key=itemgetter(1), reverse=False))
+cherry_scaff_bin_to_varients2 = collections.OrderedDict(sorted(cherry_scaff_bin_to_varients.items(),
+                                                             key=itemgetter(1), reverse=False))
+
+n_items = take(10, cherry_scaff_bin_to_PI2.items())
+
+print("cherry, hiest PI:", n_items)
+n_items = take(10, cherry_scaff_bin_to_varients2.items())
+print("cherry, most varients:", n_items)
+
+# cleavers: find the most SNP heavy region:
+cleavers = collections.OrderedDict(sorted(cress_scaff_bin_to_PI.items(),
+                                                             key=itemgetter(1), reverse=False))
+cress_scaff_bin_to_varients2 = collections.OrderedDict(sorted(cress_scaff_bin_to_varients.items(),
+                                                             key=itemgetter(1), reverse=False))
+
+n_items = take(3, cleavers.items())
+
+print("cress, hiest PI:", n_items)
+n_items = take(3, cress_scaff_bin_to_varients2.items())
+print("cress, most varients:", n_items)
