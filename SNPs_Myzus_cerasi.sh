@@ -148,3 +148,6 @@ vcftools --vcf M.cerasi_cherry_galium_cress.vcf --window-pi 10000 --out M.cerasi
 
 # the three reps on cleavers/ galium (sticky weed - what ever it is called)
 vcftools --vcf M.cerasi_cherry_galium_cress.vcf --window-pi 10000 --out M.cerasi_cleavers.10000.sitepi  --remove-indv  Mc_PR_Cherry_1  --remove-indv  Mc_PR_Cherry_2  --remove-indv  Mc_PR_Cherry_3  --remove-indv  Mc_PR_cress_1  --remove-indv  Mc_PR_cress_2   --remove-indv  Mc_PR_cress_3  
+
+# The resulting files were then parsed and analysed with 
+python compare_genetic_diversity.py
