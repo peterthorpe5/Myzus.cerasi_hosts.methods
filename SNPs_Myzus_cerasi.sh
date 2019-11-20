@@ -151,3 +151,8 @@ vcftools --vcf M.cerasi_cherry_galium_cress.vcf --window-pi 10000 --out M.cerasi
 
 # The resulting files were then parsed and analysed with 
 python compare_genetic_diversity.py
+
+# to investigate expected versus observer heterozygosity
+
+vcftools --vcf M.cerasi_cherry_galium_cress.vcf --het --out M.cerasi_cherry_galium_cress.het
+
